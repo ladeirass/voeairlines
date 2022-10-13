@@ -1,4 +1,4 @@
-package br.com.voeairlines.entities;
+ package br.com.voeairlines.entities;
 
 public class Aeronave {
 	
