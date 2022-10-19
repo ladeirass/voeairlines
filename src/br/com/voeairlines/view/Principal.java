@@ -1,5 +1,5 @@
 package br.com.voeairlines.view;
-import br.com.voeairlines.bo.*;
+//import br.com.voeairlines.bo.*;
 // importa tudo que esta dentro do Swing
 import javax.swing.JOptionPane;
 
@@ -37,7 +37,9 @@ public class Principal {
 			
 		}*/
 			
-		new LoginView().setVisible(true);
+	//	new FrameLogin().setVisible(true);
+		
+		new FrameLogin().setVisible(true);
 		
 		
 		

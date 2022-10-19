@@ -1,17 +1,17 @@
- package br.com.voeairlines.entities;
+ package br.com.voeairlines.model;
 
-public class Aeronave {
+public class AeronaveDTO {
 	
 	private int id;
 	private String fabricante;
 	private String modelo;
 	private String codigo;
 	
-	public Aeronave() {
+	public AeronaveDTO() {
 						
 	}
 
-	public Aeronave(String fabricante, String modelo, String codigo) {
+	public AeronaveDTO(String fabricante, String modelo, String codigo) {
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.codigo = codigo;
