@@ -1,29 +1,23 @@
 package br.com.voeairlines.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
 import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 public class FrameLogin extends JFrame {
 
@@ -41,8 +35,9 @@ public class FrameLogin extends JFrame {
 	// 90, Image.SCALE_SMOOTH);*/
 
 	private JPanel contentPane;
-	private JTextField txtUsuario;
 	private JPasswordField txtSenha;
+	private JLabel lblLoginMensagem = new JLabel("");
+	private JTextField txtUsuario;
 
 	/**
 	 * Launch the application.
@@ -83,36 +78,39 @@ public class FrameLogin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		txtUsuario = new JTextField();
-		txtUsuario.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtUsuario.getText().equals("")) {
-					txtUsuario.setText("Usuario");
-				}
-			}
-
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtUsuario.getText().equals("Usúario")) {
-					txtUsuario.setText("");
-				} else {
-					txtUsuario.selectAll();
-				}
-			}
-		});
-
-		txtUsuario.setBorder(null);
-		txtUsuario.setFont(new Font("Fira Sans Condensed Book", Font.BOLD, 14));
-		txtUsuario.setText("Usúario");
-		txtUsuario.setBounds(12, 12, 170, 20);
-		panel.add(txtUsuario);
-		txtUsuario.setColumns(10);
-
 		JLabel lblIconUsername = new JLabel("");
 		lblIconUsername.setBounds(210, 0, 40, 40);
 		// lblIconUsername.setIcon(new ImageIcon(imguser));
 		panel.add(lblIconUsername);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtUsuario.getText().equals("Usúario")) {
+					txtUsuario.setText("");
+					
+				}
+				else {
+					txtUsuario.selectAll();
+				}
+				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtUsuario.getText().equals(""))
+					txtUsuario.setText("Usúario");
+				
+			}
+		});
+		txtUsuario.setFont(new Font("Fira Sans Condensed Book", Font.BOLD, 14));
+		txtUsuario.setBorder(null);
+		txtUsuario.setText("Usúario");
+		txtUsuario.setBounds(10, 11, 170, 20);
+		panel.add(txtUsuario);
+		txtUsuario.setColumns(10);
+//		txtUsuario.setColumns(10);
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -121,6 +119,7 @@ public class FrameLogin extends JFrame {
 		panel_1.setLayout(null);
 
 		txtSenha = new JPasswordField();
+		txtSenha.setCaretColor(Color.GRAY);
 		txtSenha.setText("Password");
 		txtSenha.addFocusListener(new FocusAdapter() {
 
@@ -178,10 +177,18 @@ public class FrameLogin extends JFrame {
 				pnlBtnEntrar.setBackground(new Color(30, 60, 60));
 
 			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(txtUsuario.getText().equals("senai") && txtSenha.getText().equals("123")) {
-				//pedir a entrada dos dados oelo teclado, é o mais correto
+				if (txtUsuario.getText().equals("senai") && txtSenha.getText().equals("123")) {
+					lblLoginMensagem.setText("");
+					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso");
+
+				} else if (txtUsuario.getText().equals("") || txtUsuario.getText().equals("Usuario")
+						|| txtSenha.getText().equals("") || txtSenha.getText().equals("Senha")) {
+					lblLoginMensagem.setText("Por favor, preencha todos os campos!");
+				} else {
+					lblLoginMensagem.setText("senha ou usuário incorretos");
 
 				}
 			}
@@ -193,9 +200,10 @@ public class FrameLogin extends JFrame {
 		pnlBtnEntrar.setLayout(null);
 
 		JLabel lblEntrar = new JLabel("Entrar");
+		lblEntrar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEntrar.setForeground(Color.WHITE);
 		lblEntrar.setFont(new Font("Fira Sans Condensed Book", Font.BOLD, 14));
-		lblEntrar.setBounds(123, 11, 117, 28);
+		lblEntrar.setBounds(67, 12, 117, 28);
 		pnlBtnEntrar.add(lblEntrar);
 
 		JLabel lblx = new JLabel("X");
@@ -211,11 +219,6 @@ public class FrameLogin extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				lblx.setForeground(Color.RED);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				lblx.setForeground(Color.WHITE);
 			}
 		});
 		lblx.setForeground(Color.WHITE);
@@ -235,7 +238,6 @@ public class FrameLogin extends JFrame {
 		lblNewLabel.setBounds(50, 0, 143, 61);
 		panel_2.add(lblNewLabel);
 
-		JLabel lblLoginMensagem = new JLabel("New label");
 		lblLoginMensagem.setForeground(new Color(220, 20, 60));
 		lblLoginMensagem.setFont(new Font("Fira Sans Book", Font.BOLD, 12));
 		lblLoginMensagem.setBounds(187, 277, 250, 15);
